@@ -1,16 +1,14 @@
 pipeline {
     agent any
 
+    environment {
+        K6_HOME = 'C:\\k6' // Update this path if K6 is installed elsewhere
+    }
+
     stages {
         stage('Checkout Code') {
             steps {
-                git url: 'https://github.com/Ajayan-NTP/hotelApp.git'
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                bat 'npm install'
+                git url: 'https://github.com/Ajayan-NTP/hotelApp.git', branch: 'main'
             }
         }
 
@@ -22,7 +20,7 @@ pipeline {
 
         stage('Archive Report') {
             steps {
-                archiveArtifacts artifacts: 'resultin&out.html', allowEmptyArchive: true
+                archiveArtifacts artifacts: '**/*.html, **/*.json', allowEmptyArchive: true
             }
         }
     }
