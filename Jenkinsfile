@@ -10,13 +10,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install' // Only if you're using local modules or JS libs
+                bat 'npm install'
             }
         }
 
         stage('Run K6 Performance Test') {
             steps {
-                sh 'k6 run loginout.js'
+                bat 'k6 run loginout.js'
             }
         }
 
